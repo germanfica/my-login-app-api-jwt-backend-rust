@@ -56,7 +56,20 @@ where
     // Self::Future = Pin<Box<dyn Future<Output = Result<ServiceResponse<EitherBody<B>>, Error>> + 'static>>;
     // Output: Result<ServiceResponse<EitherBody<B>>, Error>> + 'static>
     fn call(&self, req: ServiceRequest) -> Self::Future {
-        let mut authenticate_pass: bool = false;
+        let mut authenticate_pass: bool = true;
+        let mut is_blocked_ip: bool = false;
+
+        if is_blocked_ip {
+            let (request, _pl) = req.into_parts();
+            let response = HttpResponse::Forbidden()
+                .json(ResponseBody::new(
+                    "Access from this IP is forbidden",
+                    constants::EMPTY,
+                ))
+                .map_into_right_body();
+
+            return Box::pin(async { Ok(ServiceResponse::new(request, response)) });
+        }
 
         if !authenticate_pass {
             let (request, _pl) = req.into_parts();
