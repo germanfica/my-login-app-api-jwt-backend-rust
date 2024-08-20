@@ -1,10 +1,15 @@
 // use actix_web::{App, HttpServer};
 //use actix_identity::{IdentityService, CookieIdentityPolicy};
 use crate::config::Config;
+
 use actix_cors::Cors;
 use actix_identity::IdentityMiddleware;
 use actix_web::middleware::Logger;
 use env_logger::Env;
+
+use actix_web::{dev::Service as _};
+use futures_util::future::FutureExt;
+
 
 // use crate::auth::{login, authenticate_jwt};
 
@@ -12,6 +17,12 @@ use actix_web::{cookie::Key, get, post, web, App, HttpResponse, HttpServer, Resp
 
 // mod auth;
 mod config;
+mod constants;
+mod middlewares; // Agrega esta línea al inicio de main.rs
+mod utils;
+mod models;
+// mod schema;
+
 // mod services;
 
 #[get("/")]
@@ -32,7 +43,7 @@ async fn hello() -> impl Responder {
 }
 
 #[get("/hello_world")]
-async fn helloWorld() -> impl Responder {
+async fn hello_world() -> impl Responder {
     let config = Config::from_env();
 
     let response_body = format!(
@@ -77,9 +88,18 @@ async fn main() -> std::io::Result<()> {
             .wrap(IdentityMiddleware::default()) // Use IdentityMiddleware
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
+            .wrap(crate::middlewares::auth_middleware::SayHi)
+            // .wrap_fn(|req, srv| {
+            //     println!("Hi from start. You requested: {}", req.path());
+            //     srv.call(req).map(|res| {
+            //         println!("Hi from response");
+            //         res
+            //     })
+            // })
+            // .wrap(crate::middlewares::auth_middleware::Authentication)
             .service(hello)
             .service(echo)
-            .service(helloWorld)
+            .service(hello_world)
             .route("/hey", web::get().to(manual_hello))
     })
     .bind(("127.0.0.1", 8080))?
