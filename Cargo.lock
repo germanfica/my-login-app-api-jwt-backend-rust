@@ -1206,6 +1206,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a7a70ba024b9dc04c27ea2f0c0548feb474ec5c54bba33a7f72f873a39d07b24"
 
 [[package]]
+name = "login_orm"
+version = "0.1.0"
+
+[[package]]
 name = "memchr"
 version = "2.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1256,6 +1260,7 @@ dependencies = [
  "futures",
  "futures-util",
  "jsonwebtoken",
+ "login_orm",
  "serde",
  "serde_json",
 ]

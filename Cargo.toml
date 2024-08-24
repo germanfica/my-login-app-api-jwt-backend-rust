@@ -3,6 +3,11 @@ name = "my_login_app_api"
 version = "0.1.0"
 edition = "2021"
 
+[workspace]
+members = [
+    "crates/login_orm"
+]
+
 [dependencies]
 actix-web = "4.9.0"
 actix-identity = "0.7.1"
@@ -19,3 +24,4 @@ diesel = { version = "2.0", features = ["postgres", "r2d2", "chrono", "serde_jso
 actix-service = "2.0.2"
 futures = "0.3.30" # oficial
 futures-util = "0.3.30" # oficial
+login_orm = { path = "crates/login_orm" }
