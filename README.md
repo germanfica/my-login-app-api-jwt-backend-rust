@@ -12,12 +12,12 @@
 
 This step is critical in order to be able to run `cargo run` in Windows. You need the requested libraries in your system enviroment variables.
 
-- __Step 1:__ Download PostgreSQL Binaries v16.4 from https://www.enterprisedb.com/download-postgresql-binaries"
-- __Step 2:__ Extract the zip file to `C:\\pgsql`
-- __Step 3:__ Set the environment variable by running:"
+- __Step 1:__ Download PostgreSQL Binaries v16.4 from https://www.enterprisedb.com/download-postgresql-binaries
+- __Step 2:__ Extract the zip file to `C:\pgsql`
+- __Step 3:__ Set the environment variable by running in CMD:
 
     ```bash
-    setx PQ_LIB_DIR \"C:\\pgsql\\lib\"
+    setx PQ_LIB_DIR "C:\pgsql\lib"
     ```
 
 - __Step 4:__ Run `cargo clean`

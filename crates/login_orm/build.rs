@@ -44,7 +44,7 @@ fn main() {
         println!("Windows Setup Instructions:");
         println!("Step 1: Download PostgreSQL Binaries v16.4 from https://www.enterprisedb.com/download-postgresql-binaries");
         println!("Step 2: Extract the zip file to C:\\pgsql");
-        println!("Step 3: Set the environment variable by running:");
+        println!("Step 3: Set the environment variable by running in CMD:");
         println!("        setx PQ_LIB_DIR \"C:\\pgsql\\lib\"");
         println!("Step 4: Run 'cargo clean'");
         println!("Step 5: Run 'cargo run' to start the application.");
