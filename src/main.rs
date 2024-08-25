@@ -14,6 +14,7 @@ use futures_util::future::FutureExt;
 // use crate::auth::{login, authenticate_jwt};
 
 use actix_web::{cookie::Key, get, post, web, App, HttpResponse, HttpServer, Responder};
+use login_orm::add;
 
 // mod auth;
 mod config;
@@ -29,14 +30,17 @@ mod models;
 async fn hello() -> impl Responder {
     let config = Config::from_env();
 
+    let result = add(2, 2);
+
     let response_body = format!(
-        "Hello world! JWT: {}; DB_HOST: {}; DB_PORT: {}, DB_USERNAME: {}; DB_PASSWORD: {}; DB_NAME: {}",
+        "Hello world! JWT: {}; DB_HOST: {}; DB_PORT: {}, DB_USERNAME: {}; DB_PASSWORD: {}; DB_NAME: {}; ADD LIB EXAMPLE: {}",
         config.jwt_secret,
         config.db_host,
         config.db_port,
         config.db_username,
         config.db_password,
-        config.db_name
+        config.db_name,
+        result
     );
 
     HttpResponse::Ok().body(response_body)
