@@ -3,7 +3,7 @@ use std::{env, fs, path::Path, process::Command};
 fn main() {
     let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
     let lib_dir = match target_os.as_str() {
-        "windows" => "libs\\windows",
+        "windows" => "C:\\pgsql\\lib",
         "linux" => "libs/linux",
         _ => panic!("Unsupported OS"),
     };
@@ -15,29 +15,32 @@ fn main() {
     );
 
     // Ruta relativa al directorio del proyecto
-    let destination = Path::new("libs\\windows");
-    let pq_lib_dir = destination.to_str().unwrap();
+    if target_os == "windows" {
+        let destination = Path::new(lib_dir);
+        let pq_lib_dir = destination.to_str().unwrap();
 
-    println!("PQ_LIB_DIR: {}", pq_lib_dir);
+        println!("PQ_LIB_DIR: {}", pq_lib_dir);
 
-    // Imprimir el contenido del directorio lib_dir
-    println!("Contents of {}:", lib_dir);
-    if let Ok(entries) = fs::read_dir(lib_dir) {
-        for entry in entries {
-            let entry = entry.expect("Failed to read directory entry");
-            let path = entry.path();
-            if path.is_file() {
-                println!("File: {:?}", path);
-            } else if path.is_dir() {
-                println!("Directory: {:?}", path);
+        // Imprimir el contenido del directorio lib_dir
+        println!("Contents of {}:", lib_dir);
+        if let Ok(entries) = fs::read_dir(lib_dir) {
+            for entry in entries {
+                let entry = entry.expect("Failed to read directory entry");
+                let path = entry.path();
+                if path.is_file() {
+                    println!("File: {:?}", path);
+                } else if path.is_dir() {
+                    println!("Directory: {:?}", path);
+                }
             }
+        } else {
+            println!("Failed to read directory: {}", lib_dir);
         }
-    } else {
-        println!("Failed to read directory: {}", lib_dir);
     }
 
     // Windows instructions
     if target_os == "windows" {
+        println!("");
         println!("Windows Setup Instructions:");
         println!("Step 1: Download PostgreSQL Binaries v16.4 from https://www.enterprisedb.com/download-postgresql-binaries");
         println!("Step 2: Extract the zip file to C:\\pgsql");
