@@ -24,3 +24,11 @@ This step is critical in order to be able to run `cargo run` in Windows. You nee
 - __Step 5:__ Run `cargo run` to start the application.
 
 And that's it enjoy!
+
+## Install diesel cli
+
+```bash
+cargo install diesel_cli
+
+cargo install diesel_cli --no-default-features --features postgres
+```

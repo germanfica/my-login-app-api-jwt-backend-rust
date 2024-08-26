@@ -5,6 +5,7 @@ use crate::config::Config;
 use actix_cors::Cors;
 use actix_identity::IdentityMiddleware;
 use actix_web::middleware::Logger;
+use diesel::{ExpressionMethods, SelectableHelper};
 use env_logger::Env;
 
 use actix_web::{dev::Service as _};
@@ -14,7 +15,11 @@ use futures_util::future::FutureExt;
 // use crate::auth::{login, authenticate_jwt};
 
 use actix_web::{cookie::Key, get, post, web, App, HttpResponse, HttpServer, Responder};
-use login_orm::add;
+use login_orm::{add, establish_connection, models::Post};
+
+use self::models::*;
+use diesel::prelude::*;
+
 
 // mod auth;
 mod config;
@@ -74,6 +79,23 @@ async fn manual_hello() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    // use self::login_orm::schema::posts::dsl::*;
+
+    let connection = &mut establish_connection();
+    // let results = posts
+    //     .filter(published.eq(true))
+    //     .limit(5)
+    //     .select(Post::as_select())
+    //     .load(connection)
+    //     .expect("Error loading posts");
+
+    // println!("Displaying {} posts", results.len());
+    // for post in results {
+    //     println!("{}", post.title);
+    //     println!("-----------\n");
+    //     println!("{}", post.body);
+    // }
+    
     let config = Config::from_env();
     // let secret_key: Key = Key::from(config.jwt_secret.as_bytes()); // Usa la clave JWT como clave secreta para SessionMiddleware
     use actix_web::{App, HttpServer};
