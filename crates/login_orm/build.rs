@@ -65,11 +65,11 @@ fn main() {
         //     .arg("clean")
         //     .output()
         //     .expect("Failed to run 'cargo clean'.");
+        // Verificar si las variables de entorno necesarias están presentes
+        env::var("PQ_LIB_DIR")
+            .expect("Error: La variable de entorno PQ_LIB_DIR no está establecida.");
+        env::var("SQLITE3_LIB_DIR")
+            .expect("Error: La variable de entorno SQLITE3_LIB_DIR no está establecida.");
+        // Puedes añadir otras verificaciones o configuraciones necesarias aquí
     }
-
-    // Verificar si las variables de entorno necesarias están presentes
-    env::var("PQ_LIB_DIR").expect("Error: La variable de entorno PQ_LIB_DIR no está establecida.");
-    env::var("SQLITE3_LIB_DIR")
-        .expect("Error: La variable de entorno SQLITE3_LIB_DIR no está establecida.");
-    // Puedes añadir otras verificaciones o configuraciones necesarias aquí
 }
