@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 # diesel = { version = "2.2.0", path = "../../../diesel", features = ["postgres"] }
-diesel = { version = "2.2.0", features = ["postgres"] }
+diesel = { version = "2.2.3", features = ["postgres", "mysql"] }
 dotenvy = "0.15"
 
 [dev-dependencies]

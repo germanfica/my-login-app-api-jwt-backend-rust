@@ -1,36 +1,37 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:12 # For some reason, PostgreSQL 16 is not working
-    container_name: postgres_db
+  mysql:
+    image: mysql:8.4.2
+    container_name: mysql_db
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     ports:
-      - "5432:5432"
+      - "3306:3306"
 
-  app:
-    build: .
-    container_name: my_login_app_api
-    environment:
-      JWT_SECRET: ${JWT_SECRET}
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
-      DATABASE_URL: postgres://${DB_USERNAME}:${DB_PASSWORD}@postgres_db:5432/${DB_NAME}
-      RUST_LOG: info
-    ports:
-      - "8530:8080"
-    depends_on:
-      - postgres
-    env_file:
-      - .env
+  # app:
+  #   build: .
+  #   container_name: my_login_app_api
+  #   environment:
+  #     JWT_SECRET: ${JWT_SECRET}
+  #     DB_HOST: ${DB_HOST}
+  #     DB_PORT: ${DB_PORT}
+  #     DB_USERNAME: ${DB_USERNAME}
+  #     DB_PASSWORD: ${DB_PASSWORD}
+  #     DB_NAME: ${DB_NAME}
+  #     DATABASE_URL: postgres://${DB_USERNAME}:${DB_PASSWORD}@postgres_db:5432/${DB_NAME}
+  #     RUST_LOG: info
+  #   ports:
+  #     - "8530:8080"
+  #   depends_on:
+  #     - postgres
+  #   env_file:
+  #     - .env
 
 volumes:
-  postgres_data:
+  mysql_data:

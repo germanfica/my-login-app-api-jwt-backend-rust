@@ -742,9 +742,12 @@ dependencies = [
  "chrono",
  "diesel_derives",
  "itoa",
+ "mysqlclient-sys",
+ "percent-encoding",
  "pq-sys",
  "r2d2",
  "serde_json",
+ "url",
 ]
 
 [[package]]
@@ -1347,6 +1350,16 @@ dependencies = [
  "login_orm",
  "serde",
  "serde_json",
+]
+
+[[package]]
+name = "mysqlclient-sys"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "478e2040dbc35c73927b77a2be91a496de19deab376a6982ed61e89592434619"
+dependencies = [
+ "pkg-config",
+ "vcpkg",
 ]
 
 [[package]]

@@ -50,6 +50,11 @@ fn main() {
         println!("Step 5: Run 'cargo run' to start the application.");
         println!("Enjoy!");
 
+        println!("");
+        println!("Step 3: Set the environment variable by running in CMD:");
+        println!("        setx MYSQLCLIENT_LIB_DIR \"C:\\path\\to\\mysql\\lib\"");
+        println!("        setx MYSQLCLIENT_VERSION \"8.4.2\"");
+
         // Automatically set PQ_LIB_DIR for the current session if not already set
         // if env::var("PQ_LIB_DIR").is_err() {
         //     env::set_var("PQ_LIB_DIR", "C:\\pgsql\\lib");
@@ -70,6 +75,11 @@ fn main() {
             .expect("Error: La variable de entorno PQ_LIB_DIR no está establecida.");
         env::var("SQLITE3_LIB_DIR")
             .expect("Error: La variable de entorno SQLITE3_LIB_DIR no está establecida.");
+        env::var("MYSQLCLIENT_LIB_DIR")
+            .expect("Error: La variable de entorno MYSQLCLIENT_LIB_DIR no está establecida.");
+        env::var("MYSQLCLIENT_VERSION")
+            .expect("Error: La variable de entorno MYSQLCLIENT_VERSION no está establecida.");
+
         // Puedes añadir otras verificaciones o configuraciones necesarias aquí
     }
 }
