@@ -15,7 +15,8 @@ use futures_util::future::FutureExt;
 // use crate::auth::{login, authenticate_jwt};
 
 use actix_web::{cookie::Key, get, post, web, App, HttpResponse, HttpServer, Responder};
-use login_orm::{add, establish_connection, models::Post};
+use login_orm::add;
+// use login_orm::{add, establish_connection, models::Post};
 
 use self::models::*;
 use diesel::prelude::*;
@@ -81,7 +82,7 @@ async fn manual_hello() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     // use self::login_orm::schema::posts::dsl::*;
 
-    let connection = &mut establish_connection();
+    // let connection = &mut establish_connection();
     // let results = posts
     //     .filter(published.eq(true))
     //     .limit(5)

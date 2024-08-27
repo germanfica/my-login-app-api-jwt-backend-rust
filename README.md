@@ -32,3 +32,52 @@ cargo install diesel_cli
 
 cargo install diesel_cli --no-default-features --features postgres
 ```
+
+```bash
+# Linux/MacOS
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/diesel-rs/diesel/releases/latest/download/diesel_cli-installer.sh | sh
+
+# Windows
+powershell -c "irm https://github.com/diesel-rs/diesel/releases/latest/download/diesel_cli-installer.ps1 | iex"
+```
+
+## MySQL version
+
+### MySQL Tested versions:
+- 8.0.0 (works)
+
+- 8.0.11 (works)
+
+    ```
+    libmysql.dll
+    libmysql.lib
+    ```
+
+- 8.0.16 (works)
+
+- 8.0.17 (works)
+
+- 8.0.18 (not working)
+
+- 8.0.19 (not working)
+
+- 8.0.20 (not working)
+
+- 8.0.30 (not working)
+
+- 8.0.37 (not working)
+
+- 8.4.2 LTS (not working) - Windows (x86, 64-bit), MSI Installer	- (mysql-8.4.2-winx64.msi)	MD5: 888dc0f177ce11ed461294ff797824c7 
+
+### Error
+
+```bash
+error: process didn't exit successfully: `target\debug\my_login_app_api.exe` (exit code: 0xc0000135, STATUS_DLL_NOT_FOUND)
+```
+
+### Tested in
+- diesel = { version = "2.2.3", features = ["mysql"] }
+
+- cargo 1.80.1 (376290515 2024-07-16)
+
+- diesel-cli. Version: 2.2.3. Supported Backends: postgres mysql sqlite

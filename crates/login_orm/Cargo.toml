@@ -5,14 +5,15 @@ edition = "2021"
 
 [dependencies]
 # diesel = { version = "2.2.0", path = "../../../diesel", features = ["postgres"] }
-diesel = { version = "2.2.3", features = ["postgres", "mysql"] }
+# diesel = { version = "2.2.3", features = ["postgres", "mysql"] }
+diesel = { version = "2.2.3", features = ["mysql"] }
 dotenvy = "0.15"
 
 [dev-dependencies]
 assert_cmd = "2.0.14"
 url = "2.2.2"
 # diesel_migrations = { version = "2.2.0", path = "../../../diesel_migrations" }
-diesel_migrations = { version = "2.2.0" }
+# diesel_migrations = { version = "2.2.0" }
 
 # [[bin]]
 # name = "show_posts_step_1"
