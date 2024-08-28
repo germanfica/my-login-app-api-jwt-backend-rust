@@ -38,18 +38,22 @@ async fn hello() -> impl Responder {
 
     let result = add(2, 2);
 
+    let posts = &posts_table_example();
+
+    //let formatted_posts: Vec<String> = posts.iter().map(|post| format!("Title: {}, Body: {}", post.title, post.body)).collect();
+    let posts_json = serde_json::to_string(&posts).expect("Failed to convert posts to JSON");
+
     let response_body = format!(
-        "Hello world! JWT: {}; DB_HOST: {}; DB_PORT: {}, DB_USERNAME: {}; DB_PASSWORD: {}; DB_NAME: {}; ADD LIB EXAMPLE: {}",
+        "Hello world! JWT: {}; DB_HOST: {}; DB_PORT: {}, DB_USERNAME: {}; DB_PASSWORD: {}; DB_NAME: {}; ADD LIB EXAMPLE: {}; POSTS: {:?};",
         config.jwt_secret,
         config.db_host,
         config.db_port,
         config.db_username,
         config.db_password,
         config.db_name,
-        result
+        result,
+        posts_json
     );
-
-    posts_table_example();
 
     HttpResponse::Ok().body(response_body)
 }
@@ -80,7 +84,7 @@ async fn manual_hello() -> impl Responder {
     HttpResponse::Ok().body("Hey there!")
 }
 
-fn posts_table_example() {
+fn posts_table_example() -> Vec<Post> {
     // use self::login_orm::schema::posts::dsl::*;
     // use self::schema::posts::dsl::*;
 
@@ -91,7 +95,7 @@ fn posts_table_example() {
     // let example = posts;
 
     let connection = &mut establish_connection();
-    let results = posts
+    let results: Vec<Post> = posts
         .filter(published.eq(true))
         .limit(5)
         .select(Post::as_select())
@@ -99,11 +103,13 @@ fn posts_table_example() {
         .expect("Error loading posts");
 
     println!("Displaying {} posts", results.len());
-    for post in results {
+    for post in &results {
         println!("{}", post.title);
         println!("-----------\n");
         println!("{}", post.body);
     }
+
+    results
 }
 
 #[actix_web::main]
