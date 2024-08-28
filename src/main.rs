@@ -38,7 +38,7 @@ async fn hello() -> impl Responder {
 
     let result = add(2, 2);
 
-    let posts = &posts_table_example();
+    let posts = &posts_table_example(); // & is more efficient than moving the entire data
 
     //let formatted_posts: Vec<String> = posts.iter().map(|post| format!("Title: {}, Body: {}", post.title, post.body)).collect();
     let posts_json = serde_json::to_string(&posts).expect("Failed to convert posts to JSON");
