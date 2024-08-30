@@ -43,6 +43,8 @@ powershell -c "irm https://github.com/diesel-rs/diesel/releases/latest/download/
 
 ## MySQL version
 
+C API (libmysqlclient) is included in MySQL 8.0.
+
 ### MySQL Tested versions:
 - 8.0.0 (works)
 
