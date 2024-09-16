@@ -9,7 +9,18 @@ RUN cargo build --release
 # Etapa final
 FROM debian:bookworm-slim
 
-RUN apt-get update && apt-get install -y libpq-dev libpq5 libc6
+# dev only for PostgreSQL
+# RUN apt-get update && apt-get install -y libpq-dev libpq5 libc6
+
+# dev only for MySQL
+# RUN apt-get update && apt-get install -y libmariadb-dev-compat
+
+# prod only for MySQL
+# RUN apt-get update && apt-get install -y libmariadb3
+
+# Instalar solo las dependencias mínimas necesarias
+RUN apt-get update && apt-get install -y --no-install-recommends libmariadb3 \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/src/my_login_app_api/target/release/my_login_app_api /usr/local/bin/my_login_app_api
 

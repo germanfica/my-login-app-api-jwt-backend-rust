@@ -741,10 +741,8 @@ dependencies = [
  "byteorder",
  "chrono",
  "diesel_derives",
- "itoa",
  "mysqlclient-sys",
  "percent-encoding",
- "pq-sys",
  "r2d2",
  "serde_json",
  "url",
@@ -1473,15 +1471,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77957b295656769bb8ad2b6a6b09d897d94f05c41b069aede1fcdaa675eaea04"
 dependencies = [
  "zerocopy",
-]
-
-[[package]]
-name = "pq-sys"
-version = "0.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a24ff9e4cf6945c988f0db7005d87747bf72864965c3529d259ad155ac41d584"
-dependencies = [
- "vcpkg",
 ]
 
 [[package]]
