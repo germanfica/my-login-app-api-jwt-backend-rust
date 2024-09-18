@@ -39,10 +39,12 @@ COPY . .
 RUN cargo build --release
 
 # Etapa final
-FROM ubuntu:22.04
+FROM debian:bookworm-slim
 
 # Copiar las bibliotecas necesarias desde la etapa de compilación
 COPY --from=builder /usr/lib/x86_64-linux-gnu/libmysqlclient.so.24 /usr/lib/x86_64-linux-gnu/libmysqlclient.so.24
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libssl.so.3 /usr/lib/x86_64-linux-gnu/libssl.so.3
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libcrypto.so.3 /usr/lib/x86_64-linux-gnu/libcrypto.so.3
 
 # Copiar el binario desde la etapa de compilación
 COPY --from=builder /usr/src/my_login_app_api/target/release/my_login_app_api /usr/local/bin/my_login_app_api
