@@ -19,8 +19,28 @@ FROM debian:bookworm-slim
 # RUN apt-get update && apt-get install -y libmariadb3
 
 # Instalar solo las dependencias mínimas necesarias
-RUN apt-get update && apt-get install -y --no-install-recommends libmariadb3 \
+# RUN apt-get update && apt-get install -y --no-install-recommends libmariadb3 \
+#     && rm -rf /var/lib/apt/lists/*
+
+# Actualizar los repositorios y paquetes
+RUN apt-get update && apt-get install -y \
+    wget \
+    libgssapi-krb5-2 \
+    libkrb5-3 \
+    libsasl2-2 \
     && rm -rf /var/lib/apt/lists/*
+
+# MySQL 8.4.2
+RUN wget https://dev.mysql.com/get/Downloads/MySQL-8.4/libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb && \
+    wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb && \
+    wget https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-common_8.4.2-1ubuntu22.04_amd64.deb && \
+    wget https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb && \
+    dpkg -i mysql-common_8.4.2-1ubuntu22.04_amd64.deb && \
+    dpkg -i mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb && \
+    dpkg -i libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb && \
+    dpkg -i libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -f *.deb
 
 COPY --from=builder /usr/src/my_login_app_api/target/release/my_login_app_api /usr/local/bin/my_login_app_api
 
