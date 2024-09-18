@@ -30,10 +30,10 @@ And that's it enjoy!
 ### Step 1: Download `.deb` Files
 
 ```bash
-wget https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-common_8.4.2-1ubuntu22.04_amd64.deb
-wget https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb
+wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/mysql-common_8.4.2-1ubuntu22.04_amd64.deb
+wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb
 wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb
-wget https://dev.mysql.com/get/Downloads/MySQL-8.4/libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb
+wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb
 ```
 
 ### Step 2: Install in Order
