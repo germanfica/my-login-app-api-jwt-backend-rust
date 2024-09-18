@@ -25,6 +25,26 @@ This step is critical in order to be able to run `cargo run` in Windows. You nee
 
 And that's it enjoy!
 
+## MySQL 8.4 Installation Guide for Ubuntu 22.04
+
+### Step 1: Download `.deb` Files
+
+```bash
+wget https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-common_8.4.2-1ubuntu22.04_amd64.deb
+wget https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb
+wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb
+wget https://dev.mysql.com/get/Downloads/MySQL-8.4/libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb
+```
+
+### Step 2: Install in Order
+
+```bash
+sudo dpkg -i mysql-common_8.4.2-1ubuntu22.04_amd64.deb
+sudo dpkg -i mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb
+sudo dpkg -i libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb
+sudo dpkg -i libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb
+```
+
 ## Install diesel cli
 
 ```bash
