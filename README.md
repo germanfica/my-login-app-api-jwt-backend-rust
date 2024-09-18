@@ -45,6 +45,21 @@ sudo dpkg -i libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb
 sudo dpkg -i libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb
 ```
 
+### Or simply run everything in 1 go
+
+```bash
+wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/mysql-common_8.4.2-1ubuntu22.04_amd64.deb && \
+wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb && \
+wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb && \
+wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb && \
+sudo dpkg -i mysql-common_8.4.2-1ubuntu22.04_amd64.deb && \
+sudo dpkg -i mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb && \
+sudo dpkg -i libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb && \
+sudo dpkg -i libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb && \
+rm mysql-common_8.4.2-1ubuntu22.04_amd64.deb mysql-community-client-plugins_8.4.2-1ubuntu22.04_amd64.deb libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb && /
+dpkg --list | grep mysql
+```
+
 ## Install diesel cli
 
 ```bash
