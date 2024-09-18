@@ -1,0 +1,26 @@
+[package]
+name = "login_orm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# diesel = { version = "2.2.0", path = "../../../diesel", features = ["postgres"] }
+# diesel = { version = "2.2.3", features = ["postgres", "mysql"] }
+diesel = { version = "2.2.3", features = ["mysql"] }
+dotenvy = "0.15"
+serde = { version = "1.0.209" }
+serde_json = "1.0.127"
+
+[dev-dependencies]
+assert_cmd = "2.0.14"
+url = "2.2.2"
+# diesel_migrations = { version = "2.2.0", path = "../../../diesel_migrations" }
+# diesel_migrations = { version = "2.2.0" }
+
+# [[bin]]
+# name = "show_posts_step_1"
+# path = "src/bin/show_posts.rs"
+# doc = false
+
+[lib]
+doc = false

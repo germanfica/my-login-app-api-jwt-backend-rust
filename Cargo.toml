@@ -3,5 +3,25 @@ name = "my_login_app_api"
 version = "0.1.0"
 edition = "2021"
 
+[workspace]
+members = [
+    "crates/login_orm"
+]
+
 [dependencies]
-actix-web = "4"
+actix-web = "4.9.0"
+actix-identity = "0.7.1"
+actix-cors = "0.7.0"
+actix-session = "0.10.0"
+actix-http = "3.9.0"
+env_logger = "0.11.5"
+jsonwebtoken = "8"
+bcrypt = "0.11"
+serde = { version = "1.0.209", features = ["derive"] }
+serde_json = "1.0.127"
+dotenv = "0.15"
+diesel = { version = "2.2.3", features = ["mysql", "r2d2", "chrono", "serde_json"] }
+actix-service = "2.0.2"
+futures = "0.3.30" # oficial
+futures-util = "0.3.30" # oficial
+login_orm = { path = "crates/login_orm" }
