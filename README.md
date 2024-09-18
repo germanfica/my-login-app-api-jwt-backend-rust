@@ -41,41 +41,39 @@ curl --proto '=https' --tlsv1.2 -LsSf https://github.com/diesel-rs/diesel/releas
 powershell -c "irm https://github.com/diesel-rs/diesel/releases/latest/download/diesel_cli-installer.ps1 | iex"
 ```
 
-## MySQL version
+## `mysqlclient-sys` Runtime Error (exit code: 0xc0000135, STATUS_DLL_NOT_FOUND) on Windows
 
-C API (libmysqlclient) is included in MySQL 8.0.
+If you encounter the error:
 
-### MySQL Tested versions:
-- 8.0.0 (works)
-
-- 8.0.11 (works)
-
-    ```
-    libmysql.dll
-    libmysql.lib
-    ```
-
-- 8.0.16 (works)
-
-- 8.0.17 (works)
-
-- 8.0.18 (not working)
-
-- 8.0.19 (not working)
-
-- 8.0.20 (not working)
-
-- 8.0.30 (not working)
-
-- 8.0.37 (not working)
-
-- 8.4.2 LTS (not working) - Windows (x86, 64-bit), MSI Installer	- (mysql-8.4.2-winx64.msi)	MD5: 888dc0f177ce11ed461294ff797824c7 
-
-### Error
+![WindowsTerminal_tJwkxZMmCu](https://github.com/user-attachments/assets/2df34b04-14d5-4971-9552-5a2bb5c799e0)
 
 ```bash
-error: process didn't exit successfully: `target\debug\my_login_app_api.exe` (exit code: 0xc0000135, STATUS_DLL_NOT_FOUND)
+error: process didn't exit successfully: `target\debug\mysqlclient_example.exe` (exit code: 0xc0000135, STATUS_DLL_NOT_FOUND)
 ```
+
+This indicates a missing DLL issue. Use [Dependency Walker](https://www.dependencywalker.com/) to identify the missing DLLs. In this case, the problem was missing `LIBCRYPTO-3-X64.DLL` and `LIBSSL-3-X64.DLL` from the MySQL bin directory.
+
+### Solution
+
+Add the MySQL bin directory to your PATH environment variable. For example, with MySQL version 8.0.36:
+
+```bash
+PATH=C:\mysql-8.0.36-winx64\bin
+MYSQLCLIENT_LIB_DIR=C:\mysql-8.0.36-winx64\lib
+MYSQLCLIENT_VERSION=8.0.36
+```
+
+Ensure these DLLs are present in the bin directory, or copy them into your project's target folder.
+
+### Explanation of Dependency Walker
+
+Dependency Walker is a tool that inspects and identifies all the DLLs that an executable depends on. It helps by:
+
+1. **Identifying Missing DLLs:** If your application fails to run due to missing dependencies, Dependency Walker shows you exactly which DLLs are missing.
+2. **Tracing Load Issues:** You can see how the system tries to load each DLL, which helps pinpoint issues related to PATH configuration or version conflicts.
+3. **Fixing Environment Setup:** Once you've identified missing DLLs (such as `LIBCRYPTO-3-X64.DLL` and `LIBSSL-3-X64.DLL`), you can update the PATH environment variable to include the correct directories or manually add the DLLs to the necessary locations.
+
+This tool was essential in resolving the missing dependency issue I faced in this project, allowing to ensure the proper setup of the environment variables and dependencies.
 
 ### Tested in
 - diesel = { version = "2.2.3", features = ["mysql"] }
