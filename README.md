@@ -45,7 +45,7 @@ sudo dpkg -i libmysqlclient24_8.4.2-1ubuntu22.04_amd64.deb
 sudo dpkg -i libmysqlclient-dev_8.4.2-1ubuntu22.04_amd64.deb
 ```
 
-### Or simply run everything in 1 go
+### Or simply install in 1 go
 
 ```bash
 wget http://repo.mysql.com/apt/ubuntu/pool/mysql-8.4-lts/m/mysql-community/mysql-common_8.4.2-1ubuntu22.04_amd64.deb && \
