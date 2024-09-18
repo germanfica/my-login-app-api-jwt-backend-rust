@@ -6,6 +6,7 @@ FROM debian:bookworm-slim as builder
 # you will need to rewrite the links.
 
 # Definir variables de construcción
+ARG RUST_VERSION=1.80.1
 ARG OS_NAME=debian
 ARG OS_VERSION=12
 ARG MYSQL_VERSION=8.4.2
@@ -14,6 +15,7 @@ ARG POOL_NAME=mysql-8.4-lts
 ARG FILE_VERSION=1
 
 # Establecer variables de entorno con los argumentos pasados
+ENV RUST_VERSION=${RUST_VERSION}
 ENV OS_NAME=${OS_NAME}
 ENV OS_VERSION=${OS_VERSION}
 ENV MYSQL_VERSION=${MYSQL_VERSION}
@@ -33,7 +35,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar Rust utilizando rustup
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain ${RUST_VERSION}
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # MySQL Community 8.4.2: Descargar e instalar dependencias de MySQL
