@@ -60,6 +60,12 @@ rm mysql-common_8.4.2-1ubuntu22.04_amd64.deb mysql-community-client-plugins_8.4.
 dpkg --list | grep mysql
 ```
 
+## MySQL for Windows
+
+For windows I made a tool that configures the environment variables that mysqlclient-sys needs to work. Check this tool: https://github.com/germanfica/mysql-env-cli-rust
+
+With that tool you will avoid problems like `Runtime Error (exit code: 0xc0000135, STATUS_DLL_NOT_FOUND)`.
+
 ## Install diesel cli
 
 ```bash
